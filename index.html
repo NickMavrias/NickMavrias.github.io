@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title> Ελάτε </title>
-    </head>
+<head>
+    <title>Supabase API Example</title>
+</head>
 <body>
-<h1>Soste malakes</h1>
+    <h1>Supabase API Example</h1>
+    <div id="data"></div>
+
+    <script>
+        // Replace with your own Supabase project URL and API key
+        const apiUrl = 'https://uelklpecmiwojemdfkqd.supabase.co/rest/v1';
+        const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlbGtscGVjbWl3b2plbWRma3FkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTk0NTM2OTcsImV4cCI6MjAxNTAyOTY5N30.ZqgJCv0rmgp4vSJu-eOVN4F1Is9z5JgjaQs2bOovDQQ';
+
+        // Function to make a GET request to the Supabase API
+        async function fetchData() {
+            try {
+                const response = await fetch(`${apiUrl}/table_name`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': apiKey,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // Display the data on the web page
+                document.getElementById('data').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Call the fetchData function to retrieve data
+        fetchData();
+    </script>
 </body>
 </html>
